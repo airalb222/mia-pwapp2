@@ -2,33 +2,40 @@
 <html lang="it">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="apple-touch-icon" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mia Prima PWA</title>
-    <!-- Colleghiamo il Manifest -->
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "09a603b0-4db1-44df-b6de-0190f3945853",
-      serviceWorkerPath: "OneSignalSDKWorker.js",
-      serviceWorkerParam: { scope: "/mia-pwapp2/" }
-    });
-  });
-</script>
+
+    <!-- SDK OneSignal -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "09a603b0-4db1-44df-b6de-0190f3945853",
+          serviceWorkerPath: "OneSignalSDKWorker.js",
+          serviceWorkerParam: { scope: "/mia-pwapp2/" }
+        });
+        
+        // Forza la richiesta se non è ancora stata fatta
+        if (OneSignal.Notifications.permission !== "granted") {
+            OneSignal.Notifications.requestPermission();
+        }
+      });
+    </script>
 </head>
 <body>
     <h1>Benvenuto nella mia App!</h1>
     <p>Questa è una web app che funziona offline.</p>
     
     <script>
-        // Registriamo il Service Worker (il motore dell'app)
+        // Registriamo il Service Worker di OneSignal invece di sw.js 
+        // per evitare conflitti su iOS
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
+            navigator.serviceWorker.register('OneSignalSDKWorker.js', { scope: '/mia-pwapp2/' });
         }
     </script>
 </body>
