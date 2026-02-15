@@ -9,23 +9,27 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 
-    <!-- SDK OneSignal -->
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "09a603b0-4db1-44df-b6de-0190f3945853",
-          serviceWorkerPath: "OneSignalSDKWorker.js",
-          serviceWorkerParam: { scope: "/mia-pwapp2/" }
-        });
-        
-        // Forza la richiesta se non è ancora stata fatta
-        if (OneSignal.Notifications.permission !== "granted") {
-            OneSignal.Notifications.requestPermission();
-        }
-      });
-    </script>
+   <!-- 1. Carica la libreria OneSignal -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
+<!-- 2. Configurazione personalizzata per la tua cartella -->
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "09a603b0-4db1-44df-b6de-0190f3945853",
+      // Specifichiamo dove si trova il file JS
+      serviceWorkerPath: "OneSignalSDKWorker.js",
+      // Specifichiamo il raggio d'azione (fondamentale per GitHub Pages)
+      serviceWorkerParam: { scope: "/mia-pwapp2/" }
+    });
+
+    // Forza la richiesta del permesso su iOS
+    if (OneSignal.Notifications.permission !== "granted") {
+        await OneSignal.Notifications.requestPermission();
+    }
+  });
+</script>
 </head>
 <body>
     <h1>Benvenuto nella mia App!</h1>
