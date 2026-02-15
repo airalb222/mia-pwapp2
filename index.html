@@ -33,34 +33,62 @@
 </head>
 <body>
     <h1>Gestione Notifiche</h1>
-    <p>Usa i pulsanti qui sotto per gestire gli avvisi:</p>
     
-    <!-- Pulsante ATTIVA -->
-    <button id="subscribe-btn" style="padding: 12px; background: #28a745; color: white; border: none; border-radius: 8px; margin-bottom: 10px;">
+    <div id="loading-status">Caricamento...</div>
+    
+    <!-- Pulsanti nascosti inizialmente -->
+    <button id="subscribe-btn" style="display:none; padding: 12px; background: #28a745; color: white; border: none; border-radius: 8px;">
         🔔 Attiva Notifiche
     </button>
 
-    <!-- Pulsante DISATTIVA -->
-    <button id="unsubscribe-btn" style="padding: 12px; background: #dc3545; color: white; border: none; border-radius: 8px;">
+    <button id="unsubscribe-btn" style="display:none; padding: 12px; background: #dc3545; color: white; border: none; border-radius: 8px;">
         🔕 Disattiva Notifiche
     </button>
 
     <script>
-        // Funzione per ATTIVARE
-        document.getElementById('subscribe-btn').addEventListener('click', function() {
-            window.OneSignalDeferred = window.OneSignalDeferred || [];
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        
+        function updateButtons() {
             OneSignalDeferred.push(function(OneSignal) {
-                OneSignal.Notifications.requestPermission();
+                const isOptedIn = OneSignal.User.PushSubscription.optedIn;
+                const hasPermission = OneSignal.Notifications.permission;
+
+                document.getElementById('loading-status').style.display = 'none';
+
+                // Se l'utente è iscritto, mostra pulsante DISATTIVA
+                if (isOptedIn && hasPermission) {
+                    document.getElementById('subscribe-btn').style.display = 'none';
+                    document.getElementById('unsubscribe-btn').style.display = 'block';
+                } else {
+                    // Altrimenti mostra pulsante ATTIVA
+                    document.getElementById('subscribe-btn').style.display = 'block';
+                    document.getElementById('unsubscribe-btn').style.display = 'none';
+                }
+            });
+        }
+
+        OneSignalDeferred.push(function(OneSignal) {
+            // Controlla lo stato ogni volta che cambia l'iscrizione
+            OneSignal.User.PushSubscription.addEventListener("change", updateButtons);
+            updateButtons();
+        });
+
+        // Azione ATTIVA (Risolve il blocco iOS)
+        document.getElementById('subscribe-btn').addEventListener('click', function() {
+            OneSignalDeferred.push(async function(OneSignal) {
+                // FORZA il ripristino dell'iscrizione software
+                await OneSignal.User.PushSubscription.optIn();
+                // Chiede il permesso al sistema (se non già dato)
+                await OneSignal.Notifications.requestPermission();
+                updateButtons();
             });
         });
 
-        // Funzione per DISATTIVARE
+        // Azione DISATTIVA
         document.getElementById('unsubscribe-btn').addEventListener('click', function() {
-            window.OneSignalDeferred = window.OneSignalDeferred || [];
             OneSignalDeferred.push(function(OneSignal) {
-                // Questo comando dice a OneSignal di non inviare più push a questo utente
                 OneSignal.User.PushSubscription.optOut();
-                alert("Notifiche disattivate correttamente.");
+                updateButtons();
             });
         });
     </script>
