@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mia Prima PWA</title>
+    <!-- Colleghiamo il Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Benvenuto nella mia App!</h1>
+    <p>Questa è una web app che funziona offline.</p>
+    
+    <script>
+        // Registriamo il Service Worker (il motore dell'app)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
