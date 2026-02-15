@@ -32,19 +32,35 @@
 </script>
 </head>
 <body>
-    <h1>Benvenuto nella mia App!</h1>
-    <p>Se non ricevi le notifiche, clicca il pulsante qui sotto:</p>
+    <h1>Gestione Notifiche</h1>
+    <p>Usa i pulsanti qui sotto per gestire gli avvisi:</p>
     
-    <!-- Pulsante per forzare il permesso su iOS -->
-    <button id="subscribe-btn" style="padding: 15px; background: #007bff; color: white; border: none; border-radius: 8px;">
-        Attiva Notifiche Push
+    <!-- Pulsante ATTIVA -->
+    <button id="subscribe-btn" style="padding: 12px; background: #28a745; color: white; border: none; border-radius: 8px; margin-bottom: 10px;">
+        🔔 Attiva Notifiche
+    </button>
+
+    <!-- Pulsante DISATTIVA -->
+    <button id="unsubscribe-btn" style="padding: 12px; background: #dc3545; color: white; border: none; border-radius: 8px;">
+        🔕 Disattiva Notifiche
     </button>
 
     <script>
+        // Funzione per ATTIVARE
         document.getElementById('subscribe-btn').addEventListener('click', function() {
             window.OneSignalDeferred = window.OneSignalDeferred || [];
             OneSignalDeferred.push(function(OneSignal) {
                 OneSignal.Notifications.requestPermission();
+            });
+        });
+
+        // Funzione per DISATTIVARE
+        document.getElementById('unsubscribe-btn').addEventListener('click', function() {
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(function(OneSignal) {
+                // Questo comando dice a OneSignal di non inviare più push a questo utente
+                OneSignal.User.PushSubscription.optOut();
+                alert("Notifiche disattivate correttamente.");
             });
         });
     </script>
