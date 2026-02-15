@@ -33,14 +33,20 @@
 </head>
 <body>
     <h1>Benvenuto nella mia App!</h1>
-    <p>Questa è una web app che funziona offline.</p>
+    <p>Se non ricevi le notifiche, clicca il pulsante qui sotto:</p>
     
+    <!-- Pulsante per forzare il permesso su iOS -->
+    <button id="subscribe-btn" style="padding: 15px; background: #007bff; color: white; border: none; border-radius: 8px;">
+        Attiva Notifiche Push
+    </button>
+
     <script>
-        // Registriamo il Service Worker di OneSignal invece di sw.js 
-        // per evitare conflitti su iOS
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('OneSignalSDKWorker.js', { scope: '/mia-pwapp2/' });
-        }
+        document.getElementById('subscribe-btn').addEventListener('click', function() {
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(function(OneSignal) {
+                OneSignal.Notifications.requestPermission();
+            });
+        });
     </script>
 </body>
 </html>
