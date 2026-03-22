@@ -1,36 +1,29 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Farmacia Brunello</title>
     <link rel="apple-touch-icon" href="icon-180.png">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="icon.png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mia Prima PWA</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 
-   <!-- 1. Carica la libreria OneSignal -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 
-<!-- 2. Configurazione personalizzata per la tua cartella -->
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "09a603b0-4db1-44df-b6de-0190f3945853",
-      // Specifichiamo dove si trova il file JS
-      serviceWorkerPath: "OneSignalSDKWorker.js",
-      // Specifichiamo il raggio d'azione (fondamentale per GitHub Pages)
-      serviceWorkerParam: { scope: "/mia-pwapp2/" }
-    });
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "09a603b0-4db1-44df-b6de-0190f3945853",
+          serviceWorkerPath: "OneSignalSDKWorker.js",
+          serviceWorkerParam: { scope: "/mia-pwapp2/" }
+        });
 
-    // Forza la richiesta del permesso su iOS
-    if (OneSignal.Notifications.permission !== "granted") {
-        await OneSignal.Notifications.requestPermission();
-    }
-  });
-</script>
+        // Dopo l'init, aggiorniamo i pulsanti
+        updateButtons();
+      });
+    </script>
 </head>
 <body>
 
@@ -38,7 +31,9 @@
         <div class="top-green-bar"></div>
         <div class="header-content">
             <div class="logo">
-                <img src="logo.png" alt="Farmacia Brunello"> </div>
+                <img src="logo.png" alt="Farmacia Brunello" onerror="this.style.display='none'"> 
+                <span id="logo-text">FARMACIA BRUNELLO</span>
+            </div>
             <div class="header-icons">
                 <button class="icon-btn">📧</button>
                 <button class="icon-btn">☎️</button>
@@ -59,10 +54,12 @@
         </section>
 
         <section class="section notification-panel">
-            <h3>Gestione Notifiche</h3>
-            <div id="loading-status">Caricamento...</div>
-            <button id="subscribe-btn" class="btn btn-subscribe" style="display:none;">🔔 Attiva Notifiche</button>
-            <button id="unsubscribe-btn" class="btn btn-unsubscribe" style="display:none;">🔕 Disattiva Notifiche</button>
+            <div style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <h3 style="margin-bottom: 10px; font-size: 1rem;">Gestione Notifiche</h3>
+                <div id="loading-status">Verifica stato...</div>
+                <button id="subscribe-btn" class="btn btn-subscribe" style="display:none;">🔔 Attiva Notifiche</button>
+                <button id="unsubscribe-btn" class="btn btn-unsubscribe" style="display:none;">🔕 Disattiva Notifiche</button>
+            </div>
         </section>
 
         <section class="section">
@@ -97,7 +94,46 @@
     </footer>
 
     <script>
-        // ... (tutto il tuo codice OneSignal inviato sopra) ...
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+
+        function updateButtons() {
+            OneSignalDeferred.push(async function(OneSignal) {
+                const isOptedIn = OneSignal.User.PushSubscription.optedIn;
+                const hasPermission = OneSignal.Notifications.permission;
+
+                document.getElementById('loading-status').style.display = 'none';
+
+                if (isOptedIn && hasPermission) {
+                    document.getElementById('subscribe-btn').style.display = 'none';
+                    document.getElementById('unsubscribe-btn').style.display = 'block';
+                } else {
+                    document.getElementById('subscribe-btn').style.display = 'block';
+                    document.getElementById('unsubscribe-btn').style.display = 'none';
+                }
+            });
+        }
+
+        // Event listener per i cambiamenti di stato
+        OneSignalDeferred.push(function(OneSignal) {
+            OneSignal.User.PushSubscription.addEventListener("change", updateButtons);
+        });
+
+        // Click pulsante ATTIVA
+        document.getElementById('subscribe-btn').addEventListener('click', function() {
+            OneSignalDeferred.push(async function(OneSignal) {
+                await OneSignal.User.PushSubscription.optIn();
+                await OneSignal.Notifications.requestPermission();
+                updateButtons();
+            });
+        });
+
+        // Click pulsante DISATTIVA
+        document.getElementById('unsubscribe-btn').addEventListener('click', function() {
+            OneSignalDeferred.push(function(OneSignal) {
+                OneSignal.User.PushSubscription.optOut();
+                updateButtons();
+            });
+        });
     </script>
 </body>
 </html>
