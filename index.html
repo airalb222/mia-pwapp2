@@ -33,65 +33,71 @@
 </script>
 </head>
 <body>
-    <h1>Gestione Notifiche</h1>
-    
-    <div id="loading-status">Caricamento...</div>
-    
-    <!-- Pulsanti nascosti inizialmente -->
-    <button id="subscribe-btn" style="display:none; padding: 12px; background: #28a745; color: white; border: none; border-radius: 8px;">
-        🔔 Attiva Notifiche
-    </button>
 
-    <button id="unsubscribe-btn" style="display:none; padding: 12px; background: #dc3545; color: white; border: none; border-radius: 8px;">
-        🔕 Disattiva Notifiche
-    </button>
+    <header class="main-header">
+        <div class="top-green-bar"></div>
+        <div class="header-content">
+            <div class="logo">
+                <img src="logo.png" alt="Farmacia Brunello"> </div>
+            <div class="header-icons">
+                <button class="icon-btn">📧</button>
+                <button class="icon-btn">☎️</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="scrollable-content">
+        <section class="section">
+            <div class="section-header">
+                <h2>EVENTI</h2>
+                <a href="#">Vedi tutti</a>
+            </div>
+            <div class="card-container">
+                <div class="card landscape-placeholder"></div>
+                <div class="card landscape-placeholder"></div>
+            </div>
+        </section>
+
+        <section class="section notification-panel">
+            <h3>Gestione Notifiche</h3>
+            <div id="loading-status">Caricamento...</div>
+            <button id="subscribe-btn" class="btn btn-subscribe" style="display:none;">🔔 Attiva Notifiche</button>
+            <button id="unsubscribe-btn" class="btn btn-unsubscribe" style="display:none;">🔕 Disattiva Notifiche</button>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2>PROMOZIONI</h2>
+                <a href="#">Vedi tutti</a>
+            </div>
+            <div class="card-container">
+                <div class="card square-placeholder"></div>
+                <div class="card square-placeholder"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-nav">
+        <div class="nav-item active">
+            <span class="nav-icon">✔️</span>
+            <span class="nav-label">HOME</span>
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">✔️</span>
+            <span class="nav-label">PRENOTA</span>
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">✔️</span>
+            <span class="nav-label">TURNI</span>
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">✔️</span>
+            <span class="nav-label">INFO</span>
+        </div>
+    </footer>
 
     <script>
-        window.OneSignalDeferred = window.OneSignalDeferred || [];
-        
-        function updateButtons() {
-            OneSignalDeferred.push(function(OneSignal) {
-                const isOptedIn = OneSignal.User.PushSubscription.optedIn;
-                const hasPermission = OneSignal.Notifications.permission;
-
-                document.getElementById('loading-status').style.display = 'none';
-
-                // Se l'utente è iscritto, mostra pulsante DISATTIVA
-                if (isOptedIn && hasPermission) {
-                    document.getElementById('subscribe-btn').style.display = 'none';
-                    document.getElementById('unsubscribe-btn').style.display = 'block';
-                } else {
-                    // Altrimenti mostra pulsante ATTIVA
-                    document.getElementById('subscribe-btn').style.display = 'block';
-                    document.getElementById('unsubscribe-btn').style.display = 'none';
-                }
-            });
-        }
-
-        OneSignalDeferred.push(function(OneSignal) {
-            // Controlla lo stato ogni volta che cambia l'iscrizione
-            OneSignal.User.PushSubscription.addEventListener("change", updateButtons);
-            updateButtons();
-        });
-
-        // Azione ATTIVA (Risolve il blocco iOS)
-        document.getElementById('subscribe-btn').addEventListener('click', function() {
-            OneSignalDeferred.push(async function(OneSignal) {
-                // FORZA il ripristino dell'iscrizione software
-                await OneSignal.User.PushSubscription.optIn();
-                // Chiede il permesso al sistema (se non già dato)
-                await OneSignal.Notifications.requestPermission();
-                updateButtons();
-            });
-        });
-
-        // Azione DISATTIVA
-        document.getElementById('unsubscribe-btn').addEventListener('click', function() {
-            OneSignalDeferred.push(function(OneSignal) {
-                OneSignal.User.PushSubscription.optOut();
-                updateButtons();
-            });
-        });
+        // ... (tutto il tuo codice OneSignal inviato sopra) ...
     </script>
 </body>
 </html>
