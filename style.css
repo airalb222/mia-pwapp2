@@ -1,0 +1,107 @@
+/* Reset base */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Altezza totale dello schermo */
+    overflow: hidden; /* Impedisce al body intero di scrollare */
+    background-color: #f5f5f5;
+}
+
+/* --- HEADER --- */
+.main-header {
+    flex-shrink: 0; /* Non si restringe */
+}
+
+.top-green-bar {
+    height: 30px;
+    background-color: #4CAF50;
+}
+
+.header-content {
+    background-color: #e0e0e0;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.logo img { height: 40px; }
+
+.header-icons .icon-btn {
+    background: #6096ba;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    margin-left: 5px;
+    color: white;
+    font-size: 20px;
+}
+
+/* --- CONTENUTO CENTRALE SCORREVOLE --- */
+.scrollable-content {
+    flex-grow: 1; /* Prende tutto lo spazio rimasto */
+    overflow-y: auto; /* Abilita lo scroll solo qui */
+    padding: 20px;
+}
+
+.section { margin-bottom: 30px; }
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h2 { font-size: 1.2rem; font-weight: bold; }
+.section-header a { text-decoration: none; color: black; font-size: 0.9rem; }
+
+.card-container { display: flex; gap: 15px; }
+
+.card {
+    background: #ddd;
+    border-radius: 15px;
+    flex: 1;
+}
+
+.landscape-placeholder { 
+    aspect-ratio: 4/5; 
+    background-image: url('placeholder.png'); /* L'immagine con le colline del tuo mockup */
+    background-size: cover;
+}
+.square-placeholder { aspect-ratio: 1/1; }
+
+/* --- MENU INFERIORE --- */
+.main-nav {
+    flex-shrink: 0;
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.nav-item {
+    text-align: center;
+    color: black;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.nav-icon {
+    display: block;
+    background: #a2d2ff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    line-height: 50px;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+/* Stili per i tuoi pulsanti notifiche */
+.btn { padding: 12px; border: none; border-radius: 8px; color: white; width: 100%; margin-top: 10px; cursor: pointer; }
+.btn-subscribe { background: #28a745; }
+.btn-unsubscribe { background: #dc3545; }
