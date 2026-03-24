@@ -136,5 +136,23 @@
             });
         });
     </script>
+    
+    <script>
+    // Selezioniamo tutti i pulsanti della barra di navigazione
+    const navItems = document.querySelectorAll('.nav-item');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // 1. Rimuoviamo la classe 'active' da tutti i pulsanti
+            navItems.forEach(nav => nav.classList.remove('active'));
+            
+            // 2. Aggiungiamo la classe 'active' solo a quello cliccato
+            this.classList.add('active');
+            
+            // 3. Qui in futuro potrai aggiungere il codice per cambiare pagina
+            // esempio: console.log("Navigo verso: " + this.querySelector('.nav-label').innerText);
+        });
+    });
+</script>
 </body>
 </html>
