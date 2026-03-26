@@ -15,8 +15,19 @@ body {
 }
 
 .top-green-bar {
-    height: 30px;
-    background-color: #4CAF50;
+    background-color: #2e7d32; /* Il tuo verde */
+    
+    /* MODIFICHE QUI: */
+    height: 4px; /* Molto più sottile (era 10px circa) */
+    
+    /* Questo assicura che lo sfondo verde "abbracci" la zona della tacca su iPhone */
+    padding-top: env(safe-area-inset-top); 
+    
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001; /* Sopra l'header bianco */
 }
 
 .header-content {
