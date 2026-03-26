@@ -80,16 +80,18 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: 70px; /* Leggermente più alta per comodità */
-    background-color: #ffffff; 
+    right: 0;
+    background: white;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-top: 1px solid #eeeeee;
-    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.1); /* Ombra per stacco netto */
+    border-top: 1px solid #eee;
     z-index: 1000;
-    padding-bottom: env(safe-area-inset-bottom); /* Supporto per iPhone moderni */
+    
+    /* MODIFICHE QUI: */
+    height: auto; /* Rimuoviamo i 60px fissi */
+    padding-top: 10px; /* Spazio sopra le icone */
+    padding-bottom: calc(env(safe-area-inset-bottom) + 12px); /* Spazio dinamico per iPhone + 2mm extra */
 }
 
 /* Singolo pulsante */
