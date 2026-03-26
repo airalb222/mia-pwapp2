@@ -78,9 +78,18 @@ body {
 .scrollable-content {
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
-    /* Aumentiamo il padding finale per non far finire il testo sotto la nuova barra alta */
-    padding-bottom: 100px; 
+    
+    /* Spazio ai lati (destra e sinistra) */
+    padding-left: 20px;
+    padding-right: 20px;
+
+    /* SPAZIO SUPERIORE (Punto 5): sposta il contenuto sotto l'header fisso */
+    /* Usiamo 90px come base + lo spazio della tacca iPhone */
+    padding-top: calc(env(safe-area-inset-top) + 90px); 
+
+    /* SPAZIO INFERIORE: evita che l'ultimo contenuto finisca sotto la barra bianca in basso */
+    /* Usiamo 100px come base + lo spazio della barra nera iPhone */
+    padding-bottom: calc(env(safe-area-inset-bottom) + 100px); 
 }
 
 .section { margin-bottom: 30px; }
