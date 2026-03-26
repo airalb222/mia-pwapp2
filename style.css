@@ -40,37 +40,34 @@ body {
 }
 
 .header-content {
-    height: 60px; /* Altezza della parte bianca */
+    height: 70px; /* Aumentata da 60px a 70px */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
 }
 
-/* --- NUOVO STILE ICONA TELEFONO IN ALTO --- */
-.header-nav-item {
+/* Stile specifico per l'icona telefono in alto che copia il footer */
+.nav-item-header {
     display: flex;
-    flex-direction: column; /* Icona sopra, testo sotto */
-    align-items: center; /* Centra orizzontalmente */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    color: #333; /* Colore scuro come il testo del logo */
+    color: #333; 
     cursor: pointer;
-    padding: 5px; /* Un po' di spazio per il tocco */
-    -webkit-tap-highlight-color: transparent; /* Rimuove il flash blu al tocco */
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Regoliamo l'icona moderna per l'header */
-.header-icon-modern {
-    font-size: 24px !important; /* Stessa dimensione delle icone sotto */
-    margin-bottom: 2px; /* Piccolo spazio prima del testo */
+/* Assicuriamoci che l'icona e l'etichetta siano identiche a quelle sotto */
+.nav-item-header .nav-icon {
+    font-size: 24px !important;
+    margin-bottom: 4px;
 }
 
-/* Stile per l'etichetta "CHIAMA" in alto */
-.header-nav-label {
-    font-size: 9px; /* Leggermente più piccolo del footer per bilanciare l'header */
+.nav-item-header .nav-label {
+    font-size: 10px;
     font-weight: 600;
-    text-transform: uppercase; /* Tutto maiuscolo come sotto */
-    letter-spacing: 0.3px;
+    text-transform: uppercase;
 }
 
 .logo {
