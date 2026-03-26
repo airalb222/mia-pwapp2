@@ -101,13 +101,13 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     
-    /* Spazio per non finire sotto l'header fisso */
-    padding-top: calc(env(safe-area-inset-top) + 80px); 
+    /* SPAZIO SUPERIORE: aumentato a 100px per l'header più alto */
+    padding-top: calc(env(safe-area-inset-top) + 100px); 
     
-    /* Spazio per non finire sotto il footer fisso */
+    /* SPAZIO INFERIORE: per il footer */
     padding-bottom: calc(env(safe-area-inset-bottom) + 100px); 
     
-    -webkit-overflow-scrolling: touch; /* Scroll fluido su iOS */
+    -webkit-overflow-scrolling: touch;
 }
 
 /* --- SEZIONI E CARD (Layout Generico) --- */
