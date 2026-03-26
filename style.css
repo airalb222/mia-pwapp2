@@ -11,7 +11,21 @@ body {
 
 /* --- HEADER --- */
 .main-header {
-    flex-shrink: 0; /* Non si restringe */
+    background: white; /* Diventa bianca */
+    
+    /* MODIFICHE QUI per posizionamento moderno e safe-area */
+    position: fixed;
+    top: 0; /* Si aggancia al top assoluto */
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Sotto la barretta verde ma sopra il contenuto */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Un'ombra leggerissima per staccare */
+    
+    /* Calcoliamo l'altezza totale: barra verde (4px) + safe area + padding di design */
+    height: calc(env(safe-area-inset-top) + 65px); /* Regola i 65px per l'altezza del contenuto bianco */
+    
+    display: flex;
+    flex-direction: column; /* Barra verde sopra, contenuto sotto */
 }
 
 .top-green-bar {
@@ -31,12 +45,15 @@ body {
 }
 
 .header-content {
-    background-color: #e0e0e0;
-    padding: 10px 15px;
+    /* MODIFICHE QUI: */
+    flex: 1; /* Prende tutto lo spazio bianco sotto la barretta verde */
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
+    align-items: center; /* Allinea verticalmente logo e telefono */
+    padding: 0 20px; /* Padding laterale */
+    
+    /* Rimuoviamo il padding-top fisso se presente, lo gestisce il .main-header */
+    margin-top: calc(env(safe-area-inset-top) + 4px); /* Sposta il contenuto sotto la safe area e la barra verde */
 }
 
 .logo img { height: 40px; }
