@@ -40,6 +40,12 @@ body {
     font-size: 20px;
 }
 
+.header-icon-modern {
+    font-size: 24px; /* Dimensione simile a quelle sotto */
+    color: #333; /* Grigio scuro/nero, coerente col testo */
+    vertical-align: middle;
+}
+
 /* --- CONTENUTO CENTRALE SCORREVOLE --- */
 .scrollable-content {
     flex: 1;
