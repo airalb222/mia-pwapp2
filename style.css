@@ -244,3 +244,84 @@ body {
     font-weight: 600;
     text-transform: uppercase;
 }
+
+/* Variabili per una gestione rapida dei colori */
+:root {
+  --primary-color: #2563eb;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --bg-card: #ffffff;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Contenitore delle card */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Struttura della Card */
+.card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden; /* Taglia l'immagine agli angoli */
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+}
+
+/* Effetto Hover (fondamentale per l'interattività) */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Immagine della Card */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* Mantiene le proporzioni senza schiacciare */
+}
+
+/* Corpo della Card */
+.card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+/* Bottone della Card */
+.card-button {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.card-button:hover {
+  background-color: #1d4ed8;
+}
