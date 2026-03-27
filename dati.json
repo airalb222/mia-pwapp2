@@ -1,0 +1,16 @@
+{
+  "eventi": [
+    {
+      "titolo": "Concerto d'Estate",
+      "data": "15 Luglio 2026",
+      "descrizione": "Musica dal vivo in piazza.",
+      "categoria": "Musica"
+    },
+    {
+      "titolo": "Sconto Black Friday",
+      "data": "Novembre 2026",
+      "descrizione": "Tutto al 50% di sconto.",
+      "categoria": "Promozione"
+    }
+  ]
+}
