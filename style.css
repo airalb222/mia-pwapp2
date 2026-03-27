@@ -159,23 +159,43 @@ body {
     padding: 5px 0 5px 10px;
 }
 
+/* Contenitore principale del logo */
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    /* Rimuovi eventuali padding o margin vecchi se disturbano */
+    height: 100%; /* Si adatta all'altezza dellheader */
 }
 
-.logo img {
-    height: 35px;
-    width: auto;
+/* Rende il link all'interno del logo flessibile */
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
 }
 
-#logo-text {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #2e7d32;
-    letter-spacing: 0.5px;
+/* La regola d'oro per il logo responsive */
+.logo-image {
+    /* Imposta un'altezza massima comoda per l'header (es. 40px o 50px) */
+    height: 40px; 
+    
+    /* Mantiene le proporzioni corrette */
+    width: auto; 
+    
+    /* Un po' di margine a sinistra se serve staccarlo dal bordo */
+    margin-left: 10px; 
+    
+    display: block;
 }
+
+/* Predisposizione Dark Mode (se usi un PNG separato in futuro) */
+/* @media (prefers-color-scheme: dark) {
+    .logo-image {
+        content: url('logo-farmacia-white.png');
+    }
+}
+*/
 
 .header-icon-modern {
     font-size: 26px !important;
