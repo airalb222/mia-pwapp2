@@ -1,4 +1,45 @@
 /* --- RESET E IMPOSTAZIONI DI BASE --- */
+:root {
+    /* Colori Tema Chiaro (Default) */
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --header-bg: #ffffff;
+    --safe-area-top: env(safe-area-inset-top);
+}
+
+/* Predisposizione Tema Scuro (si attiva automaticamente con le impostazioni del telefono) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #121212;      /* Sfondo scuro */
+        --text-color: #f1f1f1;    /* Testo chiaro */
+        --header-bg: #1e1e1e;     /* Testata scura */
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    /* Evita l'effetto "rimbalzo" azzurro/bianco durante lo scroll su iOS */
+    overscroll-behavior-y: none; 
+}
+
+/* Applichiamo lo spazio per la barra di stato dell'iPhone alla testata */
+.main-header {
+    background-color: var(--header-bg);
+    padding-top: var(--safe-area-top); /* Questo "spinge" giù la barra verde */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Assicurati che la tua linea verde sia sotto lo spazio sicuro */
+.top-green-bar {
+    height: 4px;
+    background-color: #4CAF50; /* Il tuo verde */
+    width: 100%;
+}
 
 a {
     text-decoration: none;
