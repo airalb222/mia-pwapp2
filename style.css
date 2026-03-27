@@ -70,6 +70,37 @@ body {
     text-transform: uppercase;
 }
 
+/* Effetto pressione sui tasti per feedback immediato */
+.nav-item:active, .nav-item-header:active {
+    opacity: 0.6;
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+/* Miglioramento visualizzazione card */
+.card {
+    background: #e0e0e0;
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Taglia immagini che escono dai bordi */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Stile per il testo del caricamento notifiche */
+#loading-status {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Rende il link "Vedi tutti" più facile da cliccare */
+.section-header a {
+    padding: 5px 0 5px 10px;
+}
+
 .logo {
     display: flex;
     align-items: center;
