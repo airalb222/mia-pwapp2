@@ -77,6 +77,18 @@ body {
     transition: transform 0.1s;
 }
 
+.nav-item-header {
+    text-decoration: none !important; /* Rimuove la sottolineatura */
+    outline: none;                    /* Rimuove eventuali bordi di selezione */
+    color: inherit;                   /* Mantiene il colore del testo originale */
+}
+
+/* Per sicurezza, lo togliamo anche alle icone e alle etichette interne */
+.nav-item-header .nav-icon, 
+.nav-item-header .nav-label {
+    text-decoration: none;
+}
+
 /* Miglioramento visualizzazione card */
 .card {
     background: #e0e0e0;
