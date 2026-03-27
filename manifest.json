@@ -1,10 +1,10 @@
 {
-  "name": "La Mia App",
-  "short_name": "MiaApp",
+  "name": "Farmacia Brunello",
+  "short_name": "Farma.Brunello",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#007bff",
+  "theme_color": "#ffffff,
 "icons": [
   {
     "src": "icon-192.png",
