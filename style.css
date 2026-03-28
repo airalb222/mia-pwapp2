@@ -1,87 +1,39 @@
-/* --- RESET E IMPOSTAZIONI DI BASE --- */
+/* --- 1. VARIABILI E IMPOSTAZIONI DI SISTEMA --- */
 :root {
-    /* Colori Tema Chiaro (Default) */
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --header-bg: #ffffff;
-    --safe-area-top: env(safe-area-inset-top);
-}
-
-/* Predisposizione Tema Scuro (si attiva automaticamente con le impostazioni del telefono) */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #121212;      /* Sfondo scuro */
-        --text-color: #f1f1f1;    /* Testo chiaro */
-        --header-bg: #1e1e1e;     /* Testata scura */
-    }
-}
-
-body {
-    /* Usa il font originale Apple su iPhone, Roboto su Android */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f8f9fa; /* Un grigio chiarissimo per lo sfondo generale */
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    /* Evita l'effetto "rimbalzo" azzurro/bianco durante lo scroll su iOS */
-    overscroll-behavior-y: none; 
-}
-
-/* Applichiamo lo spazio per la barra di stato dell'iPhone alla testata */
-.main-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding-top: env(safe-area-inset-top);
-    
-    /* Rendi lo sfondo leggermente trasparente (80%) */
-    background-color: rgba(255, 255, 255, 0.8); 
-    
-    /* L'effetto magico: sfoca ciò che passa sotto */
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); /* Fondamentale per Safari/iOS */
-    
-    /* Un'ombra ancora più sottile o un bordo quasi invisibile */
-    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Assicurati che la tua linea verde sia sotto lo spazio sicuro */
-.top-green-bar {
-    height: 4px;
-    background-color: #4CAF50; /* Il tuo verde */
-    width: 100%;
-}
-
-a {
-    text-decoration: none;
+    --primary-green: #2e7d32;
+    --ios-grey: #8e8e93;
+    --text-dark: #333333;
+    --bg-light: #f8f9fa;
+    --header-white: rgba(255, 255, 255, 0.8);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent; /* Rimuove il flash blu al tocco su mobile */
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden; /* Evita lo scroll dell'intero body, lo gestiamo nel main */
+    overflow: hidden; /* Gestiamo lo scroll solo nel main */
 }
 
-/* --- HEADER SUPERIORE (FISSO) --- */
+/* --- 2. HEADER SUPERIORE (EFFETTO VETRO) --- */
 .main-header {
-    background-color: #ffffff;
-    /* Importante: aggiunge spazio extra solo dove serve (sotto il notch) */
-    padding-top: env(safe-area-inset-top); 
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Una riga sottilissima invece della barra verde */
+    background-color: var(--header-white);
+    padding-top: env(safe-area-inset-top); /* Spazio per il Notch */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
@@ -93,150 +45,43 @@ body {
 }
 
 .logo-image {
-    height: 32px; /* Leggermente più piccolo per un look più chic */
+    height: 35px;
     width: auto;
 }
 
-.nav-icon {
-    color: #8e8e93; /* Usiamo il tuo verde solo per l'icona del telefono */
-    font-size: 24px;
-}
-
-/* Stile specifico per l'icona telefono in alto che copia il footer */
+/* Tasto Chiama in alto */
 .nav-item-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    color: #333; 
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    color: var(--text-dark);
+    text-decoration: none;
 }
 
-/* Assicuriamoci che l'icona e l'etichetta siano identiche a quelle sotto */
 .nav-item-header .nav-icon {
     font-size: 24px !important;
-    margin-bottom: 4px;
+    color: var(--text-dark) !important;
 }
 
 .nav-item-header .nav-label {
     font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 2px;
 }
 
-/* Effetto pressione sui tasti per feedback immediato */
-.nav-item:active, .nav-item-header:active {
-    opacity: 0.6;
-    transform: scale(0.95);
-    transition: transform 0.1s;
-}
-
-.nav-item-header {
-    text-decoration: none !important; /* Rimuove la sottolineatura */
-    outline: none;                    /* Rimuove eventuali bordi di selezione */
-    color: inherit;                   /* Mantiene il colore del testo originale */
-}
-
-/* Per sicurezza, lo togliamo anche alle icone e alle etichette interne */
-.nav-item-header .nav-icon, 
-.nav-item-header .nav-label {
-    text-decoration: none;
-}
-
-/* Miglioramento visualizzazione card */
-.card {
-    background: #e0e0e0;
-    border-radius: 12px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Taglia immagini che escono dai bordi */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease; /* Transizione fluida */
-}
-
-.card:active {
-    transform: scale(0.97); /* Si rimpicciolisce del 3% quando premuta */
-}
-
-/* Stile per il testo del caricamento notifiche */
-#loading-status {
-    font-size: 0.85rem;
-    color: #666;
-    font-style: italic;
-}
-
-/* Rende il link "Vedi tutti" più facile da cliccare */
-.section-header a {
-    padding: 5px 0 5px 10px;
-}
-
-/* Contenitore principale del logo */
-.logo {
-    display: flex;
-    align-items: center;
-    /* Rimuovi eventuali padding o margin vecchi se disturbano */
-    height: 100%; /* Si adatta all'altezza dellheader */
-}
-
-/* Rende il link all'interno del logo flessibile */
-.logo a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    height: 100%;
-}
-
-/* La regola d'oro per il logo responsive */
-.logo-image {
-    /* Imposta un'altezza massima comoda per l'header (es. 40px o 50px) */
-    height: 40px; 
-    
-    /* Mantiene le proporzioni corrette */
-    width: auto; 
-    
-    /* Un po' di margine a sinistra se serve staccarlo dal bordo */
-    margin-left: 10px; 
-    
-    display: block;
-}
-
-/* Predisposizione Dark Mode (se usi un PNG separato in futuro) */
-/* @media (prefers-color-scheme: dark) {
-    .logo-image {
-        content: url('logo-farmacia-white.png');
-    }
-}
-*/
-
-.header-icon-modern {
-    font-size: 26px !important;
-    color: #333;
-    cursor: pointer;
-}
-
-/* --- CONTENUTO CENTRALE SCORREVOLE --- */
+/* --- 3. CONTENUTO SCORREVOLE --- */
 .scrollable-content {
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    
-    /* SPAZIO SUPERIORE: aumentato a 100px per l'header più alto */
-    padding-top: calc(env(safe-area-inset-top) + 100px); 
-    
-    /* SPAZIO INFERIORE: per il footer */
-    padding-bottom: calc(env(safe-area-inset-bottom) + 100px); 
-    
     -webkit-overflow-scrolling: touch;
+    /* Spazio per non finire sotto header e footer */
+    padding-bottom: calc(env(safe-area-inset-bottom) + 100px);
 }
 
-/* --- SEZIONI E CARD (Layout Generico) --- */
+/* --- 4. SEZIONI E CARD --- */
 .section {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .section-header {
@@ -249,55 +94,65 @@ body {
 .section-header h2 {
     font-size: 0.85rem;
     font-weight: 700;
-    color: #8e8e93; /* Grigio tipico di iOS per i sottotitoli */
+    color: var(--ios-grey);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 15px;
 }
 
 .section-header a {
-    color: #2e7d32;
-    text-decoration: none;
+    color: var(--primary-green);
     font-size: 0.9rem;
     font-weight: 600;
+    text-decoration: none;
 }
 
+/* Card Horizontal Scroll */
 .card-container {
     display: flex;
     gap: 15px;
     overflow-x: auto;
     padding-bottom: 10px;
-    scrollbar-width: none; /* Nasconde scrollbar su Firefox */
+    scrollbar-width: none;
 }
 
-.card-container::-webkit-scrollbar {
-    display: none; /* Nasconde scrollbar su Chrome/Safari */
-}
+.card-container::-webkit-scrollbar { display: none; }
 
 .card {
-    background: #e0e0e0;
-    border-radius: 12px;
-    flex-shrink: 0;
+    background: white;
+    border-radius: 15px;
+    min-width: 280px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+    border: 1px solid #eee;
 }
 
-.landscape-placeholder { width: 260px; height: 150px; }
-.square-placeholder { width: 160px; height: 160px; }
+.card:active { transform: scale(0.96); }
 
-/* --- BOTTONI NOTIFICHE --- */
-.btn {
+.card-image {
     width: 100%;
-    padding: 12px;
-    border: none;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-body { padding: 15px; }
+
+.card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
+
+.card-text { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+
+.card-button {
+    display: block;
+    background: var(--primary-green);
+    color: white;
+    text-align: center;
+    padding: 10px;
     border-radius: 8px;
     font-weight: 600;
-    margin-top: 10px;
-    cursor: pointer;
+    text-decoration: none;
 }
 
-.btn-subscribe { background-color: #2e7d32; color: white; }
-.btn-unsubscribe { background-color: #f44336; color: white; }
-
-/* --- NAVIGAZIONE INFERIORE (FISSA) --- */
+/* --- 5. NAVIGAZIONE INFERIORE --- */
 .main-nav {
     position: fixed;
     bottom: 0;
@@ -306,119 +161,53 @@ body {
     background: white;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    padding-top: 12px;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
     border-top: 1px solid #eee;
     z-index: 1000;
-    
-    /* Altezza adattiva per iPhone */
-    height: auto;
-    padding-top: 10px;
-    padding-bottom: calc(env(safe-area-inset-bottom) + 12px);
 }
 
 .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #888;
+    color: var(--ios-grey); /* Colore spento di base */
     text-decoration: none;
     flex: 1;
-    cursor: pointer;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
+/* Stato Attivo: Icona e Testo diventano verdi insieme */
 .nav-item.active {
-    color: #2e7d32;
+    color: var(--primary-green) !important;
 }
 
 .nav-icon {
-    font-size: 24px !important;
-    margin-bottom: 4px;
+    font-size: 26px !important;
+    margin-bottom: 3px;
 }
 
 .nav-label {
-    font-size: 10px; /* Ridotto leggermente per far stare "IMPOSTAZIONI" */
+    font-size: 10px;
     font-weight: 600;
-    text-transform: uppercase;
 }
 
-/* Variabili per una gestione rapida dei colori */
-:root {
-  --primary-color: #2563eb;
-  --text-main: #1f2937;
-  --text-muted: #6b7280;
-  --bg-card: #ffffff;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+/* --- 6. UTILITY --- */
+.notification-panel {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* Contenitore delle card */
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
+.btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    margin-top: 10px;
 }
 
-/* Struttura della Card */
-.card {
-  background-color: var(--bg-card);
-  border-radius: 12px;
-  overflow: hidden; /* Taglia l'immagine agli angoli */
-  box-shadow: var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #e5e7eb;
-}
-
-/* Effetto Hover (fondamentale per l'interattività) */
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-/* Immagine della Card */
-.card-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover; /* Mantiene le proporzioni senza schiacciare */
-}
-
-/* Corpo della Card */
-.card-body {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.card-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 0.75rem;
-}
-
-.card-text {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-}
-
-/* Bottone della Card */
-.card-button {
-  background-color: var(--primary-color);
-  color: white;
-  text-align: center;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s;
-}
-
-.card-button:hover {
-  background-color: #1d4ed8;
-}
+.btn-subscribe { background: var(--primary-green); color: white; }
+.btn-unsubscribe { background: #ff3b30; color: white; }
