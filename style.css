@@ -64,33 +64,31 @@ body {
 
 /* --- HEADER SUPERIORE (FISSO) --- */
 .main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    display: flex;
-    flex-direction: column;
-    /* L'altezza si adatta alla safe area + contenuto */
-    height: auto; 
-}
-
-.top-green-bar {
-    background-color: #2e7d32;
-    height: 4px; /* Sottile come richiesto */
-    width: 100%;
-    /* Si estende sopra la tacca dell'iPhone */
+    background-color: #ffffff;
+    /* Importante: aggiunge spazio extra solo dove serve (sotto il notch) */
     padding-top: env(safe-area-inset-top); 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #f0f0f0; /* Una riga sottilissima invece della barra verde */
 }
 
 .header-content {
-    height: 70px; /* Aumentata da 60px a 70px */
+    height: 60px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: 0 20px;
+}
+
+.logo-image {
+    height: 35px; /* Leggermente più piccolo per un look più chic */
+    width: auto;
+}
+
+.nav-icon {
+    color: #2e7d32; /* Usiamo il tuo verde solo per l'icona del telefono */
+    font-size: 24px;
 }
 
 /* Stile specifico per l'icona telefono in alto che copia il footer */
