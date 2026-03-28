@@ -154,6 +154,11 @@ body {
     justify-content: center;
     overflow: hidden; /* Taglia immagini che escono dai bordi */
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease; /* Transizione fluida */
+}
+
+.card:active {
+    transform: scale(0.97); /* Si rimpicciolisce del 3% quando premuta */
 }
 
 /* Stile per il testo del caricamento notifiche */
