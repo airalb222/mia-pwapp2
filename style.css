@@ -221,6 +221,7 @@ body {
 .scrollable-content {
     flex: 1;
     overflow-y: auto;
+    padding: 20px;
     padding-left: 20px;
     padding-right: 20px;
     
@@ -246,8 +247,12 @@ body {
 }
 
 .section-header h2 {
-    font-size: 1.2rem;
+    font-size: 0.85rem;
     font-weight: 700;
+    color: #8e8e93; /* Grigio tipico di iOS per i sottotitoli */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
 }
 
 .section-header a {
