@@ -60,23 +60,6 @@
   </div>
     
     <main class="scrollable-content">
-        <section class="section">
-            <div class="section-header">
-                <h2>EVENTI</h2>
-                <a href="#">Vedi tutti</a>
-            </div>
-            <div class="card-container">
-  <div class="card">
-    <img src="evento1.jpg" alt="Evento" class="card-image">
-    <div class="card-body">
-      <h2 class="card-title">Visita Dermatologica</h2>
-      <p class="card-text">Prenota il tuo screening gratuito in farmacia.</p>
-      <a href="#" class="card-button">Scopri di più</a>
-    </div>
-  </div>
-  </div>
-        </section>
-
         <section class="section notification-panel">
             <div style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                 <h3 style="margin-bottom: 10px; font-size: 1rem;">Gestione Notifiche</h3>
@@ -86,23 +69,31 @@
             </div>
         </section>
 
-        <section class="section">
-            <div class="section-header">
-                <h2>PROMOZIONI</h2>
-                <a href="#">Vedi tutti</a>
-            </div>
-            <div class="card-container">
-  <div class="card">
-    <img src="evento1.jpg" alt="Evento" class="card-image">
-    <div class="card-body">
-      <h2 class="card-title">Visita Dermatologica</h2>
-      <p class="card-text">Prenota il tuo screening gratuito in farmacia.</p>
-      <a href="#" class="card-button">Scopri di più</a>
-    </div>
-  </div>
-  </div>
-            </div>
-        </section>
+       <section class="section notification-panel">
+        <div style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <h3 style="margin-bottom: 10px; font-size: 1rem;">Resta aggiornato</h3>
+            <div id="loading-status">Verifica stato...</div>
+            <button id="subscribe-btn" class="btn btn-subscribe" style="display:none;">🔔 Attiva Notifiche</button>
+            <button id="unsubscribe-btn" class="btn btn-unsubscribe" style="display:none;">🔕 Disattiva Notifiche</button>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>EVENTI</h2>
+            <a href="#">Vedi tutti</a>
+        </div>
+        <div id="container-eventi" class="card-container"></div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>PROMOZIONI</h2>
+            <a href="#">Vedi tutti</a>
+        </div>
+        <div id="container-promozioni" class="card-container"></div>
+    </section>
+       
     </main>
 
     <footer class="main-nav">
