@@ -17,7 +17,9 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    /* Usa il font originale Apple su iPhone, Roboto su Android */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa; /* Un grigio chiarissimo per lo sfondo generale */
     color: var(--text-color);
     margin: 0;
     padding: 0;
