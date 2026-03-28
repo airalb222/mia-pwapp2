@@ -29,12 +29,20 @@ body {
 
 /* Applichiamo lo spazio per la barra di stato dell'iPhone alla testata */
 .main-header {
-    background-color: var(--header-bg);
-    padding-top: var(--safe-area-top); /* Questo "spinge" giù la barra verde */
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding-top: env(safe-area-inset-top);
+    
+    /* Rendi lo sfondo leggermente trasparente (80%) */
+    background-color: rgba(255, 255, 255, 0.8); 
+    
+    /* L'effetto magico: sfoca ciò che passa sotto */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); /* Fondamentale per Safari/iOS */
+    
+    /* Un'ombra ancora più sottile o un bordo quasi invisibile */
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Assicurati che la tua linea verde sia sotto lo spazio sicuro */
