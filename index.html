@@ -165,4 +165,33 @@
         });
     });
 </script>
+
+   async function loadEvents() {
+    const eventsList = document.getElementById('events-list');
+    const API_URL = 'https://sheetdb.io/api/v1/mcvst24hmpts3'; // Sostituisci con il tuo link SheetDB
+
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        eventsList.innerHTML = ''; // Svuota il caricamento
+
+        data.forEach(event => {
+            const card = `
+                <div class="event-card">
+                    <img src="${event.immagine}" class="event-image" alt="${event.titolo}">
+                    <div class="event-info">
+                        <span class="event-date">${event.data}</span>
+                        <h4 class="event-title">${event.titolo}</h4>
+                    </div>
+                </div>
+            `;
+            eventsList.innerHTML += card;
+        });
+    } catch (error) {
+        console.error("Errore nel caricamento eventi:", error);
+        eventsList.innerHTML = '<div class="event-card">Impossibile caricare gli eventi al momento.</div>';
+    }
+}
+   
 </html>
