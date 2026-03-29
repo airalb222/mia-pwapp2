@@ -63,6 +63,31 @@
             <div class="event-card">Caricamento eventi...</div>
         </div>
     </section>
+
+    <section id="turni-section" class="section" style="display:none; padding: 0 20px;">
+    <div class="section-header">
+        <h2>Turni Farmacia</h2>
+    </div>
+    
+    <div id="turno-attuale-container">
+        <p style="font-size: 0.9rem; margin-bottom: 10px; color: #666;">Turno in corso:</p>
+        <div class="shift-card-main">
+            <img id="img-turno-attuale" src="" class="zoomable-img" alt="Turno Attuale">
+        </div>
+    </div>
+
+    <div id="altri-turni" style="margin-top: 25px;">
+        <p style="font-size: 0.8rem; font-weight: bold; color: var(--ios-grey); text-transform: uppercase;">Altre settimane</p>
+        <div class="events-container" id="lista-altri-turni" style="padding: 10px 0;">
+            </div>
+    </div>
+</section>
+
+<div id="zoom-modal" class="modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="img-zoomato">
+</div>
+    
 </main>
 
 <footer class="main-nav">
