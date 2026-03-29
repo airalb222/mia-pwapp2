@@ -133,38 +133,47 @@
     });
 
     // 3. Funzione Caricamento Eventi da Google Sheet (SheetDB)
-    async function loadEvents() {
-        const eventsList = document.getElementById('events-list');
-        const API_URL = 'https://sheetdb.io/api/v1/mcvst24hmpts3'; 
+async function loadEvents() {
+    const eventsList = document.getElementById('events-list');
+    const API_URL = 'https://sheetdb.io/api/v1/mcvst24hmpts3';
+    
+    // URL di un'immagine di default (puoi cambiarlo con un tuo logo o una foto fissa)
+    const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1586015555751-63bb77f4322a?q=80&w=1000&auto=format&fit=crop';
 
-        try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
 
-            if (data.length === 0) {
-                eventsList.innerHTML = '<div class="event-card">Nessun evento in programma.</div>';
-                return;
-            }
-
-            eventsList.innerHTML = ''; 
-
-            data.forEach(event => {
-                const card = `
-                    <div class="event-card">
-                        <img src="${event.immagine}" class="event-image" alt="${event.titolo}">
-                        <div class="event-info">
-                            <span class="event-date">${event.data}</span>
-                            <h4 class="event-title">${event.titolo}</h4>
-                        </div>
-                    </div>
-                `;
-                eventsList.innerHTML += card;
-            });
-        } catch (error) {
-            console.error("Errore nel caricamento eventi:", error);
-            eventsList.innerHTML = '<div class="event-card">Errore di connessione.</div>';
+        if (!data || data.length === 0) {
+            eventsList.innerHTML = '<div class="event-card"><div class="event-info">Nessun evento in programma.</div></div>';
+            return;
         }
+
+        eventsList.innerHTML = ''; 
+
+        data.forEach(event => {
+            // Controllo se l'immagine esiste nel foglio, altrimenti uso quella di default
+            const imgUrl = (event.immagine && event.immagine.trim() !== "") ? event.immagine : DEFAULT_IMAGE;
+
+            const card = `
+                <div class="event-card">
+                    <img src="${imgUrl}" 
+                         class="event-image" 
+                         alt="${event.titolo}" 
+                         onerror="this.onerror=null;this.src='${DEFAULT_IMAGE}';">
+                    <div class="event-info">
+                        <span class="event-date">${event.data || 'Prossimamente'}</span>
+                        <h4 class="event-title">${event.titolo || 'Nuovo Evento'}</h4>
+                    </div>
+                </div>
+            `;
+            eventsList.innerHTML += card;
+        });
+    } catch (error) {
+        console.error("Errore nel caricamento eventi:", error);
+        eventsList.innerHTML = '<div class="event-card"><div class="event-info">Errore di connessione.</div></div>';
     }
+}
 
     // Avvia il caricamento eventi all'apertura
     loadEvents();
