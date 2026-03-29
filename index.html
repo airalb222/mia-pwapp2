@@ -45,49 +45,50 @@
 </header>
     
 <main class="scrollable-content">
-    <section class="section notification-panel">
-        <div style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h3 style="margin-bottom: 10px; font-size: 1rem;">Resta aggiornato</h3>
-            <div id="loading-status">Verifica stato...</div>
-            <button id="subscribe-btn" class="btn btn-subscribe" style="display:none;">🔔 Attiva Notifiche</button>
-            <button id="unsubscribe-btn" class="btn btn-unsubscribe" style="display:none;">🔕 Disattiva Notifiche</button>
-        </div>
-    </section>
+    <div id="home-content">
+        <section class="section notification-panel">
+            <div style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <h3 style="margin-bottom: 10px; font-size: 1rem;">Resta aggiornato</h3>
+                <div id="loading-status">Verifica stato...</div>
+                <button id="subscribe-btn" class="btn btn-subscribe" style="display:none;">🔔 Attiva Notifiche</button>
+                <button id="unsubscribe-btn" class="btn btn-unsubscribe" style="display:none;">🔕 Disattiva Notifiche</button>
+            </div>
+        </section>
 
-    <section class="events-section">
-        <div class="section-header">
-            <h2>Prossimi Eventi</h2>
-            <span class="view-all">Vedi tutti</span>
-        </div>
-        <div class="events-container" id="events-list">
-            <div class="event-card">Caricamento eventi...</div>
-        </div>
-    </section>
+        <section class="events-section">
+            <div class="section-header">
+                <h2>Prossimi Eventi</h2>
+                <span class="view-all">Vedi tutti</span>
+            </div>
+            <div class="events-container" id="events-list">
+                <div class="event-card">Caricamento eventi...</div>
+            </div>
+        </section>
+    </div>
 
     <section id="turni-section" class="section" style="display:none; padding: 0 20px;">
-    <div class="section-header">
-        <h2>Turni Farmacia</h2>
-    </div>
-    
-    <div id="turno-attuale-container">
-        <p style="font-size: 0.9rem; margin-bottom: 10px; color: #666;">Turno in corso:</p>
-        <div class="shift-card-main">
-            <img id="img-turno-attuale" src="" class="zoomable-img" alt="Turno Attuale">
+        <div class="section-header">
+            <h2>Turni Farmacia</h2>
         </div>
-    </div>
-
-    <div id="altri-turni" style="margin-top: 25px;">
-        <p style="font-size: 0.8rem; font-weight: bold; color: var(--ios-grey); text-transform: uppercase;">Altre settimane</p>
-        <div class="events-container" id="lista-altri-turni" style="padding: 10px 0;">
+        
+        <div id="turno-attuale-container">
+            <p style="font-size: 0.9rem; margin-bottom: 10px; color: #666;">Turno in corso:</p>
+            <div class="shift-card-main">
+                <img id="img-turno-attuale" src="" class="zoomable-img" alt="Turno Attuale">
             </div>
-    </div>
-</section>
+        </div>
 
-<div id="zoom-modal" class="modal">
-    <span class="close-modal">&times;</span>
-    <img class="modal-content" id="img-zoomato">
-</div>
-    
+        <div id="altri-turni" style="margin-top: 25px;">
+            <p style="font-size: 0.8rem; font-weight: bold; color: var(--ios-grey); text-transform: uppercase;">Altre settimane</p>
+            <div class="events-container" id="lista-altri-turni" style="padding: 10px 0;">
+                </div>
+        </div>
+    </section>
+
+    <div id="zoom-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="img-zoomato">
+    </div>
 </main>
 
 <footer class="main-nav">
@@ -110,7 +111,7 @@
 </footer>
 
 <script>
-    // 1. Gestione Pulsanti Notifiche
+    // 1. OneSignal & Notifiche
     window.OneSignalDeferred = window.OneSignalDeferred || [];
 
     function updateButtons() {
@@ -119,13 +120,8 @@
             const hasPermission = OneSignal.Notifications.permission;
             document.getElementById('loading-status').style.display = 'none';
 
-            if (isOptedIn && hasPermission) {
-                document.getElementById('subscribe-btn').style.display = 'none';
-                document.getElementById('unsubscribe-btn').style.display = 'block';
-            } else {
-                document.getElementById('subscribe-btn').style.display = 'block';
-                document.getElementById('unsubscribe-btn').style.display = 'none';
-            }
+            document.getElementById('subscribe-btn').style.display = (isOptedIn && hasPermission) ? 'none' : 'block';
+            document.getElementById('unsubscribe-btn').style.display = (isOptedIn && hasPermission) ? 'block' : 'none';
         });
     }
 
@@ -133,151 +129,130 @@
         OneSignal.User.PushSubscription.addEventListener("change", updateButtons);
     });
 
-    document.getElementById('subscribe-btn').addEventListener('click', function() {
-        OneSignalDeferred.push(async function(OneSignal) {
+    document.getElementById('subscribe-btn').addEventListener('click', () => {
+        OneSignalDeferred.push(async (OneSignal) => {
             await OneSignal.User.PushSubscription.optIn();
             await OneSignal.Notifications.requestPermission();
             updateButtons();
         });
     });
 
-    document.getElementById('unsubscribe-btn').addEventListener('click', function() {
-        OneSignalDeferred.push(function(OneSignal) {
+    document.getElementById('unsubscribe-btn').addEventListener('click', () => {
+        OneSignalDeferred.push((OneSignal) => {
             OneSignal.User.PushSubscription.optOut();
             updateButtons();
         });
     });
 
-    // 2. Gestione Menu Navigazione
+    // 2. Navigazione tra sezioni
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => {
         item.addEventListener('click', function() {
             navItems.forEach(nav => nav.classList.remove('active'));
             this.classList.add('active');
-        });
-    });
 
-    // 3. Funzione Caricamento Eventi da Google Sheet (SheetDB)
-async function loadEvents() {
-    const eventsList = document.getElementById('events-list');
-    const API_URL = 'https://sheetdb.io/api/v1/mcvst24hmpts3';
-    
-    // URL di un'immagine di default (puoi cambiarlo con un tuo logo o una foto fissa)
-    const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1586015555751-63bb77f4322a?q=80&w=1000&auto=format&fit=crop';
+            const label = this.querySelector('.nav-label').innerText;
+            const homeContent = document.getElementById('home-content');
+            const turniSection = document.getElementById('turni-section');
 
-    try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-
-        if (!data || data.length === 0) {
-            eventsList.innerHTML = '<div class="event-card"><div class="event-info">Nessun evento in programma.</div></div>';
-            return;
-        }
-
-        eventsList.innerHTML = ''; 
-
-        data.forEach(event => {
-            // Controllo se l'immagine esiste nel foglio, altrimenti uso quella di default
-            const imgUrl = (event.immagine && event.immagine.trim() !== "") ? event.immagine : DEFAULT_IMAGE;
-
-            const card = `
-                <div class="event-card">
-                    <img src="${imgUrl}" 
-                         class="event-image" 
-                         alt="${event.titolo}" 
-                         onerror="this.onerror=null;this.src='${DEFAULT_IMAGE}';">
-                    <div class="event-info">
-                        <span class="event-date">${event.data || 'Prossimamente'}</span>
-                        <h4 class="event-title">${event.titolo || 'Nuovo Evento'}</h4>
-                    </div>
-                </div>
-            `;
-            eventsList.innerHTML += card;
-        });
-    } catch (error) {
-        console.error("Errore nel caricamento eventi:", error);
-        eventsList.innerHTML = '<div class="event-card"><div class="event-info">Errore di connessione.</div></div>';
-    }
-}
-
-    
-// 3. Questa funzione scarica i turni, trova quello corretto in base alla data odierna e gestisce lo zoom
-    
- async function loadTurni() {
-    const API_URL_TURNI = 'https://sheetdb.io/api/v1/mcvst24hmpts3?sheet=Turni'; 
-    const today = new Date();
-    
-    try {
-        const response = await fetch(API_URL_TURNI);
-        const data = await response.json();
-
-        const containerAttuale = document.getElementById('img-turno-attuale');
-        const listaAltri = document.getElementById('lista-altri-turni');
-        listaAltri.innerHTML = '';
-
-        data.forEach((turno, index) => {
-            const inizio = new Date(turno.inizio);
-            const fine = new Date(turno.fine);
-            
-            // Logica Venerdì alle 08:45 (semplificata: controllo data)
-            if (today >= inizio && today < fine) {
-                // È IL TURNO ATTUALE
-                containerAttuale.src = turno.immagine;
-                
-                // Aggiungiamo i tasti per precedente e successiva se esistono
-                if(data[index-1]) aggiungiMiniatura(data[index-1], "Sett. Precedente");
-                if(data[index+1]) aggiungiMiniatura(data[index+1], "Sett. Successiva");
+            if (label === 'TURNI') {
+                homeContent.style.display = 'none';
+                turniSection.style.display = 'block';
+                loadTurni();
+            } else if (label === 'HOME') {
+                homeContent.style.display = 'block';
+                turniSection.style.display = 'none';
+                loadEvents();
             }
         });
-    } catch (e) { console.error("Errore turni", e); }
-}
-
-function aggiungiMiniatura(turno, label) {
-    const div = document.createElement('div');
-    div.className = 'event-card';
-    div.style.flex = '0 0 140px';
-    div.innerHTML = `
-        <img src="${turno.immagine}" class="event-image" style="height:100px;">
-        <div class="event-info"><span class="event-date">${label}</span></div>
-    `;
-    div.onclick = () => aprireZoom(turno.immagine);
-    document.getElementById('lista-altri-turni').appendChild(div);
-}
-
-// Gestione ZOOM
-const modal = document.getElementById("zoom-modal");
-const imgAttuale = document.getElementById("img-turno-attuale");
-const imgZoomato = document.getElementById("img-zoomato");
-
-imgAttuale.onclick = function() { aprireZoom(this.src); }
-
-function aprireZoom(src) {
-    modal.style.display = "block";
-    imgZoomato.src = src;
-}
-
-document.querySelector(".close-modal").onclick = () => modal.style.display = "none";
-window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
-
-// Modifica al cambio menu per mostrare/nascondere le sezioni
-document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', function() {
-        const label = this.querySelector('.nav-label').innerText;
-        const mainContent = document.querySelector('.scrollable-content');
-        const turniSection = document.getElementById('turni-section');
-
-        if (label === 'TURNI') {
-            mainContent.style.display = 'none'; // Nasconde home
-            turniSection.style.display = 'block';
-            loadTurni();
-        } else if (label === 'HOME') {
-            mainContent.style.display = 'block';
-            turniSection.style.display = 'none';
-        }
     });
-});   
-    
-    // Avvia il caricamento eventi all'apertura
+
+    // 3. Caricamento Eventi
+    async function loadEvents() {
+        const eventsList = document.getElementById('events-list');
+        // Aggiunto ?sheet=Eventi per sicurezza
+        const API_URL = 'https://sheetdb.io/api/v1/mcvst24hmpts3?sheet=Eventi';
+        const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1586015555751-63bb77f4322a?q=80&w=1000&auto=format&fit=crop';
+
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            eventsList.innerHTML = ''; 
+
+            if (!data || data.length === 0) {
+                eventsList.innerHTML = '<div class="event-card"><div class="event-info">Nessun evento in programma.</div></div>';
+                return;
+            }
+
+            data.forEach(event => {
+                const imgUrl = (event.immagine && event.immagine.trim() !== "") ? event.immagine : DEFAULT_IMAGE;
+                eventsList.innerHTML += `
+                    <div class="event-card">
+                        <img src="${imgUrl}" class="event-image" alt="${event.titolo}" onerror="this.src='${DEFAULT_IMAGE}';">
+                        <div class="event-info">
+                            <span class="event-date">${event.data || 'Prossimamente'}</span>
+                            <h4 class="event-title">${event.titolo || 'Nuovo Evento'}</h4>
+                        </div>
+                    </div>`;
+            });
+        } catch (error) {
+            eventsList.innerHTML = '<div class="event-card"><div class="event-info">Errore di caricamento.</div></div>';
+        }
+    }
+
+    // 4. Caricamento Turni
+    async function loadTurni() {
+        const API_URL_TURNI = 'https://sheetdb.io/api/v1/mcvst24hmpts3?sheet=Turni'; 
+        const today = new Date();
+        
+        try {
+            const response = await fetch(API_URL_TURNI);
+            const data = await response.json();
+            const containerAttuale = document.getElementById('img-turno-attuale');
+            const listaAltri = document.getElementById('lista-altri-turni');
+            listaAltri.innerHTML = '';
+
+            data.forEach((turno, index) => {
+                const inizio = new Date(turno.inizio);
+                const fine = new Date(turno.fine);
+                
+                // Logica turno attuale
+                if (today >= inizio && today < fine) {
+                    containerAttuale.src = turno.immagine;
+                    if(data[index-1]) aggiungiMiniatura(data[index-1], "Sett. Precedente");
+                    if(data[index+1]) aggiungiMiniatura(data[index+1], "Sett. Successiva");
+                }
+            });
+        } catch (e) { console.error("Errore turni", e); }
+    }
+
+    function aggiungiMiniatura(turno, label) {
+        const div = document.createElement('div');
+        div.className = 'event-card';
+        div.style.flex = '0 0 140px';
+        div.innerHTML = `
+            <img src="${turno.immagine}" class="event-image" style="height:100px; object-fit: cover;">
+            <div class="event-info"><span class="event-date">${label}</span></div>`;
+        div.onclick = () => aprireZoom(turno.immagine);
+        document.getElementById('lista-altri-turni').appendChild(div);
+    }
+
+    // 5. Zoom Immagini
+    const modal = document.getElementById("zoom-modal");
+    const imgZoomato = document.getElementById("img-zoomato");
+
+    document.getElementById('img-turno-attuale').onclick = function() { aprireZoom(this.src); };
+
+    function aprireZoom(src) {
+        if(!src) return;
+        modal.style.display = "block";
+        imgZoomato.src = src;
+    }
+
+    document.querySelector(".close-modal").onclick = () => modal.style.display = "none";
+    window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; };
+
+    // Init
     loadEvents();
 </script>
 
