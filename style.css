@@ -251,7 +251,7 @@ body {
     align-items: center !important;
     justify-content: center !important;
     /* Aumentiamo lo spazio sotto l'icona */
-    margin-bottom: 6px !important; 
+    margin-bottom: 10px !important; 
     color: #333333 !important;
 }
 
@@ -261,7 +261,7 @@ body {
     height: 26px !important;
     display: block !important;
     /* Aumentiamo lo spazio sotto l'icona WhatsApp */
-    margin-bottom: 6px !important; 
+    margin-bottom: 10px !important; 
 }
 
 .header-btn-label {
