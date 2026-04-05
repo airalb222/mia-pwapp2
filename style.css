@@ -252,8 +252,9 @@ body {
 
 /* Stile per l'icona WhatsApp (SVG) */
 .icon-wrapper svg {
-    width: 28px;  /* Più grande per compensare i bordi bianchi dell'SVG */
-    height: 28px;
+    width: 32px;  /* Portiamola a 32px (il massimo del contenitore) */
+    height: 32px;
+    transform: scale(1.15); /* Trucco finale: la facciamo "esordire" leggermente dai bordi invisibili */
 }
 
 /* Stile per l'icona Chiama (Material) */
