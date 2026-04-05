@@ -240,6 +240,7 @@ body {
     padding: 0;
     margin: 0;
 }
+/* --- AGGIORNAMENTO SPAZIATURA ICONE/SCRITTE --- */
 
 /* Icona Material (Chiama) */
 .header-btn-icon {
@@ -249,7 +250,9 @@ body {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 0 2px 0 !important;
+    /* Aumentiamo lo spazio sotto l'icona */
+    margin-bottom: 6px !important; 
+    color: #333333 !important;
 }
 
 /* Icona SVG (WhatsApp) */
@@ -257,21 +260,20 @@ body {
     width: 26px !important;
     height: 26px !important;
     display: block !important;
-    margin: 0 0 2px 0 !important;
+    /* Aumentiamo lo spazio sotto l'icona WhatsApp */
+    margin-bottom: 6px !important; 
 }
 
-/* Label di testo (Entrambe) */
 .header-btn-label {
     font-size: 9px !important;
     font-weight: 700 !important;
-    color: var(--text-dark) !important;
+    color: #333333 !important;
     text-transform: uppercase;
-    letter-spacing: 0.2px;
-    line-height: 1 !important;
-    white-space: nowrap;
-    display: block;
+    letter-spacing: 0.3px;
+    /* Assicuriamoci che non ci siano sovrapposizioni */
+    line-height: 1.2 !important; 
+    white-space: nowrap !important;
 }
-
 /* Feedback al tocco */
 .header-btn:active {
     opacity: 0.5;
