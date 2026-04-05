@@ -224,51 +224,57 @@ body {
 
 .header-icons {
     display: flex;
-    align-items: center; /* Allineamento verticale al centro rispetto alla riga dell'header */
-    gap: 20px; /* Spazio netto tra i due pulsanti */
+    align-items: center; 
+    gap: 15px; /* Ridotto leggermente per schermi piccoli */
+    height: 100%;
 }
 
 .header-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: var(--text-dark);
-    min-width: 60px; /* Larghezza minima per evitare sovrapposizioni del testo */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    color: var(--text-dark) !important; /* Forza il colore scuro invece del blu */
+    min-width: 50px;
+    padding: 0;
+    margin: 0;
 }
 
 /* Icona Material (Chiama) */
 .header-btn-icon {
-    font-size: 28px !important; /* Aumentata per visibilità */
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2px;
+    font-size: 26px !important;
+    height: 26px !important;
+    width: 26px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 0 2px 0 !important;
 }
 
 /* Icona SVG (WhatsApp) */
 .header-btn-icon-svg {
-    width: 28px; /* Identica all'icona Material */
-    height: 28px;
-    display: block;
-    margin-bottom: 2px;
+    width: 26px !important;
+    height: 26px !important;
+    display: block !important;
+    margin: 0 0 2px 0 !important;
 }
 
 /* Label di testo (Entrambe) */
 .header-btn-label {
-    font-size: 9px; /* Leggermente più piccolo per stare su una riga */
-    font-weight: 800;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
-    line-height: 1;
-    white-space: nowrap; /* Impedisce al testo di andare a capo */
+    letter-spacing: 0.2px;
+    line-height: 1 !important;
+    white-space: nowrap;
+    display: block;
 }
 
-/* Effetto pressione */
+/* Feedback al tocco */
 .header-btn:active {
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 /* --- 7. TURNI:Aggiungi queste regole per gestire le immagini A4 e l'effetto zoom clicca e ingrandisci --- */
