@@ -220,63 +220,60 @@ body {
 .btn-subscribe { background: var(--primary-green); color: white; }
 .btn-unsubscribe { background: #ff3b30; color: white; }
 
-/* --- NUOVO STILE HEADER ICONS - FIX DEFINITIVO ALLINEAMENTO --- */
+/* --- HEADER ICONS: DESIGN MODERNO --- */
 
 .header-icons {
-    display: flex !important;
-    align-items: center !important; 
-    gap: 15px !important;
-    height: 100% !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* Alziamo leggermente tutto il gruppo dal fondo */
+    margin-bottom: 4px; 
 }
 
 .header-btn {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-end !important; /* Allinea tutto alla base */
-    text-decoration: none !important;
-    color: #333333 !important; 
-    min-width: 65px !important; /* Leggermente più largo per dare respiro */
-    height: 55px !important; /* Altezza fissa per i bottoni */
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* Icona Material (Chiama) */
-.header-btn-icon {
-    font-size: 28px !important; /* Aumentato un filo */
-    height: 28px !important;
-    width: 28px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin-bottom: 6px !important; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     color: #333333 !important;
+    min-width: 60px;
 }
 
-/* Icona SVG (WhatsApp) - PORTATA A 34px PER FORZARE L'EFFETTO */
-.header-btn-icon-svg {
-    width: 34px !important; /* Qui Safari DEVE ingrandirla */
-    height: 34px !important;
-    display: block !important;
-    margin-bottom: 2px !important; /* Meno spazio sotto perché l'icona è più grande */
+/* Il segreto: un contenitore fisso per le icone */
+.icon-wrapper {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px; /* Distanza tra icona e scritta */
+}
+
+/* Stile per l'icona WhatsApp (SVG) */
+.icon-wrapper svg {
+    width: 28px;  /* Più grande per compensare i bordi bianchi dell'SVG */
+    height: 28px;
+}
+
+/* Stile per l'icona Chiama (Material) */
+.icon-wrapper .material-symbols-outlined {
+    font-size: 26px !important;
+    display: block;
 }
 
 .header-btn-label {
     font-size: 9px !important;
-    font-weight: 800 !important; /* Più grassetto per visibilità */
-    color: #333333 !important;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    line-height: 1;
     text-transform: uppercase;
-    letter-spacing: 0.4px !important;
-    line-height: 1 !important; 
-    white-space: nowrap !important;
-    display: block !important;
-    text-align: center !important;
 }
 
-/* Feedback al tocco */
+/* Effetto moderno al tocco */
 .header-btn:active {
-    opacity: 0.5;
+    transform: scale(0.95);
+    opacity: 0.7;
 }
 
 /* --- 7. TURNI:Aggiungi queste regole per gestire le immagini A4 e l'effetto zoom clicca e ingrandisci --- */
