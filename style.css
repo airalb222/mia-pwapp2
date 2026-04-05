@@ -220,62 +220,60 @@ body {
 .btn-subscribe { background: var(--primary-green); color: white; }
 .btn-unsubscribe { background: #ff3b30; color: white; }
 
-/* --- NUOVO STILE HEADER ICONS --- */
+/* --- NUOVO STILE HEADER ICONS - FIX DEFINITIVO ALLINEAMENTO --- */
 
 .header-icons {
-    display: flex;
-    align-items: center; 
-    gap: 15px; /* Ridotto leggermente per schermi piccoli */
-    height: 100%;
+    display: flex !important;
+    align-items: center !important; 
+    gap: 15px !important;
+    height: 100% !important;
 }
 
 .header-btn {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-end !important; /* Allinea tutto alla base */
     text-decoration: none !important;
-    color: var(--text-dark) !important; /* Forza il colore scuro invece del blu */
-    min-width: 50px;
-    padding: 0;
-    margin: 0;
+    color: #333333 !important; 
+    min-width: 65px !important; /* Leggermente più largo per dare respiro */
+    height: 55px !important; /* Altezza fissa per i bottoni */
+    padding: 0 !important;
+    margin: 0 !important;
 }
-/* --- AGGIORNAMENTO SPAZIATURA ICONE/SCRITTE --- */
 
 /* Icona Material (Chiama) */
 .header-btn-icon {
-    font-size: 26px !important;
-    height: 26px !important;
-    width: 26px !important;
+    font-size: 28px !important; /* Aumentato un filo */
+    height: 28px !important;
+    width: 28px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    /* Aumentiamo lo spazio sotto l'icona */
-    margin-bottom: 10px !important; 
+    margin-bottom: 6px !important; 
     color: #333333 !important;
 }
 
-/* Icona SVG (WhatsApp) - La portiamo a 31px per farla sembrare grande uguale */
+/* Icona SVG (WhatsApp) - PORTATA A 34px PER FORZARE L'EFFETTO */
 .header-btn-icon-svg {
-    width: 31px !important;
-    height: 31px !important;
+    width: 34px !important; /* Qui Safari DEVE ingrandirla */
+    height: 34px !important;
     display: block !important;
-    /* Usiamo un margine negativo o ridotto per compensare l'altezza maggiore 
-       e mantenere le scritte WHATSAPP e CHIAMA perfettamente in linea */
-    margin-bottom: 1px !important; 
-    margin-top: -5px !important;
+    margin-bottom: 2px !important; /* Meno spazio sotto perché l'icona è più grande */
 }
 
 .header-btn-label {
     font-size: 9px !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important; /* Più grassetto per visibilità */
     color: #333333 !important;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
-    /* Assicuriamoci che non ci siano sovrapposizioni */
-    line-height: 1.2 !important; 
+    letter-spacing: 0.4px !important;
+    line-height: 1 !important; 
     white-space: nowrap !important;
+    display: block !important;
+    text-align: center !important;
 }
+
 /* Feedback al tocco */
 .header-btn:active {
     opacity: 0.5;
