@@ -255,13 +255,15 @@ body {
     color: #333333 !important;
 }
 
-/* Icona SVG (WhatsApp) */
+/* Icona SVG (WhatsApp) - La portiamo a 31px per farla sembrare grande uguale */
 .header-btn-icon-svg {
-    width: 26px !important;
-    height: 26px !important;
+    width: 31px !important;
+    height: 31px !important;
     display: block !important;
-    /* Aumentiamo lo spazio sotto l'icona WhatsApp */
-    margin-bottom: 10px !important; 
+    /* Usiamo un margine negativo o ridotto per compensare l'altezza maggiore 
+       e mantenere le scritte WHATSAPP e CHIAMA perfettamente in linea */
+    margin-bottom: 1px !important; 
+    margin-top: -5px !important;
 }
 
 .header-btn-label {
