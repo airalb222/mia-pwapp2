@@ -220,30 +220,52 @@ body {
 .btn-subscribe { background: var(--primary-green); color: white; }
 .btn-unsubscribe { background: #ff3b30; color: white; }
 
-/* Allineamento orizzontale dei due tasti nell'header */
+/* Container dei due tasti */
 .header-icons {
     display: flex;
+    align-items: flex-end; /* Allinea i blocchi alla base */
+    gap: 16px; /* Spazio uniforme tra i due tasti */
+}
+
+/* Wrapper per bilanciare le dimensioni delle icone */
+.icon-wrapper {
+    height: 28px; /* Altezza fissa per garantire che le scritte partano dallo stesso punto */
+    display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
-/* Gestione dell'icona SVG per WhatsApp */
+/* Icona Call (Material) */
+.nav-item-header .nav-icon {
+    font-size: 24px !important;
+    line-height: 1;
+    display: block;
+}
+
+/* Icona WhatsApp (SVG) */
 .nav-icon-svg {
-    width: 24px;
-    height: 24px;
-    color: var(--text-dark); /* Mantiene lo stesso colore grigio/scuro del tasto Chiama */
+    width: 26px; /* Leggermente più grande per compensare visivamente il peso del font Material */
+    height: 26px;
+    display: block;
 }
 
-/* Feedback al tocco per un feeling da App nativa */
-.nav-item-header:active {
-    opacity: 0.5;
-    transform: scale(0.96);
-    transition: all 0.1s ease;
+/* Etichette di testo - Forziamo l'allineamento */
+.nav-item-header .nav-label {
+    font-size: 10px;
+    font-weight: 700;
+    margin-top: 4px; /* Spazio identico tra icona e testo */
+    line-height: 1;
+    text-align: center;
 }
 
-/* Correzione per i Material Symbols se non prendono il colore */
-.nav-item-header .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+/* Pulizia per il link */
+.nav-item-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* Spinge tutto verso il basso */
+    text-decoration: none;
+    min-width: 55px;
 }
 
 /* --- 7. TURNI:Aggiungi queste regole per gestire le immagini A4 e l'effetto zoom clicca e ingrandisci --- */
