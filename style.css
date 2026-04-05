@@ -220,52 +220,55 @@ body {
 .btn-subscribe { background: var(--primary-green); color: white; }
 .btn-unsubscribe { background: #ff3b30; color: white; }
 
-/* Container dei due tasti */
+/* --- NUOVO STILE HEADER ICONS --- */
+
 .header-icons {
     display: flex;
-    align-items: flex-end; /* Allinea i blocchi alla base */
-    gap: 16px; /* Spazio uniforme tra i due tasti */
+    align-items: center; /* Allineamento verticale al centro rispetto alla riga dell'header */
+    gap: 20px; /* Spazio netto tra i due pulsanti */
 }
 
-/* Wrapper per bilanciare le dimensioni delle icone */
-.icon-wrapper {
-    height: 28px; /* Altezza fissa per garantire che le scritte partano dallo stesso punto */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Icona Call (Material) */
-.nav-item-header .nav-icon {
-    font-size: 24px !important;
-    line-height: 1;
-    display: block;
-}
-
-/* Icona WhatsApp (SVG) */
-.nav-icon-svg {
-    width: 26px; /* Leggermente più grande per compensare visivamente il peso del font Material */
-    height: 26px;
-    display: block;
-}
-
-/* Etichette di testo - Forziamo l'allineamento */
-.nav-item-header .nav-label {
-    font-size: 10px;
-    font-weight: 700;
-    margin-top: 4px; /* Spazio identico tra icona e testo */
-    line-height: 1;
-    text-align: center;
-}
-
-/* Pulizia per il link */
-.nav-item-header {
+.header-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end; /* Spinge tutto verso il basso */
+    justify-content: center;
     text-decoration: none;
-    min-width: 55px;
+    color: var(--text-dark);
+    min-width: 60px; /* Larghezza minima per evitare sovrapposizioni del testo */
+}
+
+/* Icona Material (Chiama) */
+.header-btn-icon {
+    font-size: 28px !important; /* Aumentata per visibilità */
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+}
+
+/* Icona SVG (WhatsApp) */
+.header-btn-icon-svg {
+    width: 28px; /* Identica all'icona Material */
+    height: 28px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* Label di testo (Entrambe) */
+.header-btn-label {
+    font-size: 9px; /* Leggermente più piccolo per stare su una riga */
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1;
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
+}
+
+/* Effetto pressione */
+.header-btn:active {
+    opacity: 0.6;
 }
 
 /* --- 7. TURNI:Aggiungi queste regole per gestire le immagini A4 e l'effetto zoom clicca e ingrandisci --- */
